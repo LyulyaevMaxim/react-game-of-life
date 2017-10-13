@@ -1,0 +1,48 @@
+.hidden {
+  display: none !important;
+}
+
+.popup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.board-definition {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  background: #8ccaaa;
+  text-align: center;
+}
+
+.board-definition p {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.board-definition input {
+  border-radius: 10px;
+  border: none;
+  border: 1px solid #e1e1e1;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.board-definition input + input {
+  margin-top: 15px;
+}
+
+.board-definition button {
+  margin-top: 25px;
+  border: none;
+  background: white;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 16px;
+  height: 30px;
+  cursor: pointer;
+}
