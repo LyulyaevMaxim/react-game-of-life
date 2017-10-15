@@ -39,9 +39,15 @@ class LifeManager extends Component {
     }
 
     // Bind functions.
-    this.mod = this.mod.bind(this);
-    this.countNeighbors = this.countNeighbors.bind(this);
-    this.nextGeneration = this.nextGeneration.bind(this);
+    this.mod = this
+      .mod
+      .bind(this);
+    this.countNeighbors = this
+      .countNeighbors
+      .bind(this);
+    this.nextGeneration = this
+      .nextGeneration
+      .bind(this);
 
     this.state = board;
   }
@@ -79,8 +85,7 @@ class LifeManager extends Component {
     // down
     if (this.state[
       [
-        row,
-        this.mod(col + 1, this.props.height)
+        row, this.mod(col + 1, this.props.height)
       ]
     ]) {
       neighbors++;
@@ -88,8 +93,7 @@ class LifeManager extends Component {
     // up
     if (this.state[
       [
-        row,
-        this.mod(col - 1, this.props.height)
+        row, this.mod(col - 1, this.props.height)
       ]
     ]) {
       neighbors++;
@@ -201,9 +205,16 @@ class LifeManager extends Component {
     let cells = [];
     for (let row = 0; row < this.props.width; row++) {
       for (let col = 0; col < this.props.height; col++) {
-        cells.push(<Cell status={this.state[
+        cells.push(<Cell
+          status={this.state[
           [row, col]
-        ]} row={row} col={col} key={row + "cell" + col} cellActiveColor={this.props.cellActiveColor} cellInActiveColor={this.props.cellInActiveColor} lineColor={this.props.lineColor}/>);
+        ]}
+          row={row}
+          col={col}
+          key={row + "cell" + col}
+          cellActiveColor={this.props.cellActiveColor}
+          cellInActiveColor={this.props.cellInActiveColor}
+          lineColor={this.props.lineColor}/>);
       }
     }
 

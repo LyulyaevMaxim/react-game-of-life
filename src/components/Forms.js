@@ -1,46 +1,85 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Board from "./Board";
+import Toggle from "./Toggle";
 
-export default class Forms extends Component {
+export default class BoardContainer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      isVisible: true,
-      showBoard: false
+      formVisible: true,
+      showBoard: false,
+      firstShow: true,
+      boardRow: 0,
+      boardColumn: 0
     };
   }
 
-  //вместо явной привязки контекста с помощью bind для доступа метода к this (файл Toggle.js)
-  //можно воспользоваться анонимной функцией
-  buttonClick = () => {
+  // вместо явной привязки контекста с помощью bind для доступа метода к this
+  // (файл Toggle.js) можно воспользоваться анонимной функцией
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState(prevState => ({formVisible: false, showBoard: true, firstShow: false}));
+  };
+
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  // changeColumn = (event) => {   this.setState({column: event.target.value}); }
+
+  formShowOrHide = () => {
     this.setState(prevState => ({
-      isVisible: !prevState.isVisible,
-      showBoard: !prevState.showBoard
+      formVisible: !prevState.formVisible
     }));
   };
 
   render() {
+    let formClass = this.state.formVisible
+        ? "popup board-definition"
+        : "hidden",
+      showFormButton = this.state.formVisible
+        ? "hidden"
+        : "button-container",
+      showFormСontinueButton = this.state.firstShow
+        ? "hidden"
+        : "";
     return (
-      <div>
-        <div className={this.isVisible ? "hidden" : "popup board-definition"}>
+      <main>
+        <form className={formClass} onSubmit={this.handleSubmit}>
           <p>Введите размеры поля:</p>
           <input
-            name="width"
-            className="width"
+            name="boardColumn"
+            className="column"
             placeholder="Ширина поля"
-            required
-          />
+            onChange={this.handleInputChange}
+            type="number"
+            min="1"
+            required/>
           <input
-            name="height"
-            className="height"
+            name="boardRow"
+            className="row"
             placeholder="Высота поля"
-            required
-          />
-          <button onClick={this.buttonClick}>Создать</button>
+            onChange={this.handleInputChange}
+            type="number"
+            min="1"
+            required/>
+          <button type="submit">Создать</button>
+          <button onClick={this.formShowOrHide} className={showFormСontinueButton}>Продолжить</button>
+        </form>
+
+        <div className={showFormButton}>
+          <Toggle/>
+          <div className="show-form-button" onClick={this.formShowOrHide}>Показать форму</div>
         </div>
 
-        <Board row={3} column={5} isVisible={this.state.showBoard} />
-      </div>
+        <Board
+          row={this.state.boardRow}
+          column={this.state.boardColumn}
+          isVisible={this.state.showBoard}/>
+      </main>
     );
   }
 }

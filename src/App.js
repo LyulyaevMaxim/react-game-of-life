@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import Forms from "./components/Forms";
-import Toggle from "./components/Toggle";
+import React, {Component} from "react";
+import BoardContainer from "./components/Forms";
 
 class App extends Component {
   render() {
@@ -9,8 +8,7 @@ class App extends Component {
         <header className="App-header">
           <h1>"Жизнь" на React</h1>
         </header>
-        <Forms />
-        <Toggle />
+        <BoardContainer/>
       </div>
     );
   }

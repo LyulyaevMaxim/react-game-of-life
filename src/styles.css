@@ -36,8 +36,12 @@
   margin-top: 15px;
 }
 
-.board-definition button {
+.board-definition input + button {
   margin-top: 25px;
+  
+}
+
+.board-definition button {
   border: none;
   background: white;
   border-radius: 60px;
@@ -45,4 +49,82 @@
   font-size: 16px;
   height: 30px;
   cursor: pointer;
+}
+
+.board-definition button + button {
+  margin-top: 15px;
+  
+}
+
+.board    {
+  display: inline-flex;
+  flex-direction: column;  
+  border-collapse: initial;
+  border: 1px solid;
+  border-right: none;
+  border-bottom: none;
+  align-self: center;
+  order: -1;
+}
+
+.board td {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid;
+}
+
+.board tr {
+  border-bottom: 1px solid;
+}
+
+.board td.active {
+  background: red;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+header h1  {
+  text-align: center;
+  background: gainsboro;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.button-container button {
+  margin-right: 10px;
+}
+.button-container .show-form-button, .button-container button {
+  border: 1px solid;
+  border-radius: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: none;
+  cursor: pointer;
+  min-width: 61px;
+  justify-content: center;
+}
+.button-container .show-form-button:hover, .button-container button:hover {
+ background: gold;
+ border-color: gold;
+ color: white;
+
 }

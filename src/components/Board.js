@@ -1,50 +1,59 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, {Component} from "react";
+import Cell from "./Cell";
 
 export default class Board extends Component {
   constructor(props) {
     super(props);
-    this.props = { isVisible: false };
+    this.state = {
+      BoardArray: makeGrid(2, 2)
+    };
   }
+
+  /*componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }*/
+
+  /*componentWillUnmount() {
+    clearInterval(this.timerID);
+  }*/
+
+  /*tick() {
+    this.setState({date: new Date()});
+  }*/
 
   render() {
-    const GRID_HEIGHT = this.props.row,
-      GRID_WIDTH = this.props.column,
-      initialGrid = makeGrid(GRID_HEIGHT, GRID_WIDTH);
+    let initialGrid = makeGrid(this.props.row, this.props.column);
+    let index = -1;
 
-    if (!this.props.isVisible) {
+    let boardBody = initialGrid.map(function () {
+      index++;
+      let subindex = -1;
+      let boardLine = initialGrid[index].map(function () {
+        subindex++;
+        return <Cell key={index.toString() + ":" + subindex.toString()}/>;
+      });
+
+      return <tr key={index}>
+        {boardLine}
+      </tr>
+    });
+
+    if (this.props.isVisible) {
+      return <table className="board">{boardBody}
+      </table>;
+    } else 
       return null;
-    } else return <div className="Board ">1</div>;
+    }
   }
-}
-
-Board.propTypes = {
-  row: PropTypes.number.isRequired,
-  column: PropTypes.number.isRequired
-};
 
 function makeGrid(height, width) {
   let grid = [];
   for (var i = 0; i < height; i++) {
     var row = [];
     for (var j = 0; j < width; j++) {
-      let value;
-      row.push({
-        status: value,
-        newBorn: value
-      });
+      row.push(0);
     }
     grid.push(row);
   }
   return grid;
-}
-
-function cell(width) {
-  // {alive, newBorn, handleClick}
-  return (
-    <td
-    // onClick={handleClick}
-    // className={`${alive ? 'alive' : ''} ${newBorn ? 'new-born' : ''}`}
-    />
-  );
 }
