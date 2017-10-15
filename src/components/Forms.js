@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import Board from "./Board";
 import Toggle from "./Toggle";
 
@@ -10,8 +11,7 @@ export default class BoardContainer extends Component {
       formVisible: true,
       showBoard: false,
       firstShow: true,
-      boardRow: 0,
-      boardColumn: 0
+      boardArray: []
     };
   }
 
@@ -19,18 +19,22 @@ export default class BoardContainer extends Component {
   // (файл Toggle.js) можно воспользоваться анонимной функцией
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState(prevState => ({formVisible: false, showBoard: true, firstShow: false}));
+    this.setState(prevState => ({
+      formVisible: false,
+      showBoard: true,
+      firstShow: false,
+      boardArray: makeGrid(ReactDOM.findDOMNode(this.refs.boardRow).value, ReactDOM.findDOMNode(this.refs.boardColumn).value)
+    }));
   };
 
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  componentDidMount = () => {
+    ReactDOM
+      .findDOMNode(this.refs.boardColumn)
+      .focus();
   }
 
-  // changeColumn = (event) => {   this.setState({column: event.target.value}); }
-
-  formShowOrHide = () => {
+  formShowOrHide = (event) => {
+    event.preventDefault();
     this.setState(prevState => ({
       formVisible: !prevState.formVisible
     }));
@@ -51,18 +55,18 @@ export default class BoardContainer extends Component {
         <form className={formClass} onSubmit={this.handleSubmit}>
           <p>Введите размеры поля:</p>
           <input
-            name="boardColumn"
             className="column"
             placeholder="Ширина поля"
-            onChange={this.handleInputChange}
+            defaultValue=''
+            ref='boardColumn'
             type="number"
             min="1"
             required/>
           <input
-            name="boardRow"
             className="row"
             placeholder="Высота поля"
-            onChange={this.handleInputChange}
+            defaultValue=''
+            ref='boardRow'
             type="number"
             min="1"
             required/>
@@ -72,14 +76,23 @@ export default class BoardContainer extends Component {
 
         <div className={showFormButton}>
           <Toggle/>
-          <div className="show-form-button" onClick={this.formShowOrHide}>Показать форму</div>
+          <button className="show-form-button" onClick={this.formShowOrHide}>Показать форму</button>
         </div>
 
-        <Board
-          row={this.state.boardRow}
-          column={this.state.boardColumn}
-          isVisible={this.state.showBoard}/>
+        <Board boardArray={this.state.boardArray} isVisible={this.state.showBoard}/>
       </main>
     );
   }
+}
+
+function makeGrid(height, width) {
+  let grid = [];
+  for (var i = 0; i < height; i++) {
+    var row = [];
+    for (var j = 0; j < width; j++) {
+      row.push(0);
+    }
+    grid.push(row);
+  }
+  return grid;
 }

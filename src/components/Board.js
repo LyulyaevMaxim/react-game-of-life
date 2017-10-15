@@ -4,25 +4,10 @@ import Cell from "./Cell";
 export default class Board extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      BoardArray: makeGrid(2, 2)
-    };
   }
 
-  /*componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }*/
-
-  /*componentWillUnmount() {
-    clearInterval(this.timerID);
-  }*/
-
-  /*tick() {
-    this.setState({date: new Date()});
-  }*/
-
   render() {
-    let initialGrid = makeGrid(this.props.row, this.props.column);
+    let initialGrid = this.props.boardArray;
     let index = -1;
 
     let boardBody = initialGrid.map(function () {
@@ -45,15 +30,3 @@ export default class Board extends Component {
       return null;
     }
   }
-
-function makeGrid(height, width) {
-  let grid = [];
-  for (var i = 0; i < height; i++) {
-    var row = [];
-    for (var j = 0; j < width; j++) {
-      row.push(0);
-    }
-    grid.push(row);
-  }
-  return grid;
-}

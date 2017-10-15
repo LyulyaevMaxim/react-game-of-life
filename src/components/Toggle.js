@@ -15,24 +15,18 @@ export default class Toggle extends React.Component {
       .bind(this);
   }
 
-  handleClick() {
+  handleClick(e) {
+    e.preventDefault();
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
     }));
-    // while (this.state.isToggleOn) {   console.log(1); }
   }
 
   nextGeneration = () => {
-    // let board = document.getElementsByClassName('board'); let board =
-    // document.querySelectorAll('board');
-
     for (var i = 0; i < 10; i++) {
-      // console.log(board[i]);
       for (var j = 0; j < 15; j++) {}
     }
   }
-
-  // countNeighbors = (row, call) => {   let neighbors = 0; }
 
   render() {
     return (

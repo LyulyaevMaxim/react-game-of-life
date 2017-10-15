@@ -8,7 +8,8 @@ export default class Cell extends Component {
     };
   }
 
-  isWillLived = () => {
+  isWillLived = (event) => {
+    event.preventDefault();
     this.setState(prevState => ({
       isLive: !prevState.isLive
     }));
