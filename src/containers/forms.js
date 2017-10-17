@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-export default class Forms extends Component {
+import { connect } from "react-redux";
+
+import { createBoard, reCreateBoard } from "../actions/";
+
+export let GRID_HEIGHT = 25;
+export let GRID_WIDTH = 40;
+
+class Forms extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +65,9 @@ export default class Forms extends Component {
           min="1"
           required
         />
-        <button type="submit">Создать</button>
+        <button onClick={() => this.createBoard()} type="submit">
+          Создать
+        </button>
         <button
           onClick={this.formShowOrHide}
           className={showFormСontinueButton}
@@ -68,4 +77,20 @@ export default class Forms extends Component {
       </form>
     );
   }
+
+  createBoard() {
+    GRID_HEIGHT = ReactDOM.findDOMNode(this.refs.boardColumn).value;
+  }
 }
+
+const mapStateToProps = ({ forms }) => {
+  return { forms };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createBoard: (x, y) => dispatch(createBoard(x, y))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Forms);

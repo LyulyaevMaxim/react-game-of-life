@@ -1,3 +1,11 @@
+export function createBoard(columns, rows) {
+  return { type: "CREATE", columns, rows };
+}
+
+export function reCreateBoard() {
+  return { type: "CHANGE" };
+}
+
 export function toggleAlive(x, y) {
   return { type: "TOGGLE_ALIVE", x, y };
 }

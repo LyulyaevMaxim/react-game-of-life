@@ -1,7 +1,6 @@
 import * as grid from "../components/grid";
+import { GRID_HEIGHT, GRID_WIDTH } from "../containers/forms";
 
-const GRID_HEIGHT = 25;
-const GRID_WIDTH = 40;
 const initialGrid = grid.makeGrid(GRID_HEIGHT, GRID_WIDTH);
 
 export default (state = initialGrid, action) => {
