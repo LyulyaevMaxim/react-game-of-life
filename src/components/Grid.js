@@ -16,6 +16,9 @@ export const advanceGrid = function (grid = []) {
   let gridWidth = grid[0].length;
 
   let calculateNeighbours = function (x, y) {
+    // в одном из способов решения предлагалось делать поле замкнутым, аналогично
+    // земному шару, поэтому если ячейка находится на краю сетки, то будем ссылаться
+    // на ячейку на противоположном краю
     let topRow = x - 1 < 0
       ? (gridHeight - 1)
       : x - 1;
@@ -42,6 +45,8 @@ export const advanceGrid = function (grid = []) {
     return total;
   };
 
+  // создадим новый массив, в который запишем результаты после применения правил
+  // игры к существующей сетке
   let gameState = [];
   for (let i = 0; i < gridHeight; i++) {
     let row = [];

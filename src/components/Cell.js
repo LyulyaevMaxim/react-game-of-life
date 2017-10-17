@@ -1,5 +1,15 @@
 import React, {Component} from "react";
 
+/*export default({alive, newBorn, handleClick}) => (
+  <td
+    onClick={handleClick}
+    className={`${alive
+    ? 'alive'
+    : ''} ${newBorn
+      ? 'new-born'
+      : ''}`}></td>
+)*/
+
 export default class Cell extends Component {
   constructor(props) {
     super(props);

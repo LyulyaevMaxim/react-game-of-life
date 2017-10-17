@@ -1,4 +1,4 @@
-import * as grid from '../bin/grid';
+import * as grid from '../components/Grid';
 
 const GRID_HEIGHT = 25;
 const GRID_WIDTH = 40;
