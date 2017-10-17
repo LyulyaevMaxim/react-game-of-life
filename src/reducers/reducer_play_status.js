@@ -4,13 +4,13 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  switch(action.type){
-    case 'PLAY':
+  switch (action.type) {
+    case "PLAY":
       return {
         timerId: action.timerId,
         isRunning: true
       };
-    case 'STOP':
+    case "STOP":
       return {
         timerId: null,
         isRuninng: false

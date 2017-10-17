@@ -5,7 +5,7 @@
 .popup {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 25%;
   transform: translate(-50%, -50%);
 }
 .board-definition {
@@ -38,7 +38,6 @@
 
 .board-definition input + button {
   margin-top: 25px;
-  
 }
 
 .board-definition button {
@@ -53,31 +52,32 @@
 
 .board-definition button + button {
   margin-top: 15px;
-  
 }
 
-.board    {
-  display: inline-flex;
-  flex-direction: column;  
-  border-collapse: initial;
-  border: 1px solid;
-  border-right: none;
-  border-bottom: none;
-  align-self: center;
-  order: -1;
+.board {
+  display: flex;
+  justify-content: center;
 }
 
 .board td {
   width: 20px;
   height: 20px;
-  border-right: 1px solid;
-}
-
-.board tr {
-  border-bottom: 1px solid;
+  border: 1px solid;
 }
 
 .board td.active {
+  background: red;
+}
+
+.alive {
+  background: #ff5400;
+}
+
+.new-born {
+  background: #ffbf00;
+}
+
+td:hover:not(.alive):not(.new-born) {
   background: red;
 }
 
@@ -90,15 +90,12 @@ header {
   margin-bottom: 30px;
 }
 
-header h1  {
+header h1 {
   text-align: center;
   background: gainsboro;
   font-weight: 700;
   font-size: 28px;
 }
-
-
-
 
 .button-container {
   display: flex;
@@ -109,7 +106,8 @@ header h1  {
 .button-container button {
   margin-right: 10px;
 }
-.button-container .show-form-button, .button-container button {
+.button-container .show-form-button,
+.button-container button {
   border: 1px solid;
   border-radius: 10px;
   height: 30px;
@@ -122,9 +120,9 @@ header h1  {
   min-width: 61px;
   justify-content: center;
 }
-.button-container .show-form-button:hover, .button-container button:hover {
- background: gold;
- border-color: gold;
- color: white;
-
+.button-container .show-form-button:hover,
+.button-container button:hover {
+  background: gold;
+  border-color: gold;
+  color: white;
 }

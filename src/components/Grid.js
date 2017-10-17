@@ -4,33 +4,22 @@ export const makeGrid = (height, width) => {
     var row = [];
     for (var j = 0; j < width; j++) {
       let value;
-      row.push({status: value, newBorn: value});
+      row.push({ status: value, newBorn: value });
     }
     grid.push(row);
   }
   return grid;
 };
 
-export const advanceGrid = function (grid = []) {
+export const advanceGrid = function(grid = []) {
   let gridHeight = grid.length;
   let gridWidth = grid[0].length;
 
-  let calculateNeighbours = function (x, y) {
-    // в одном из способов решения предлагалось делать поле замкнутым, аналогично
-    // земному шару, поэтому если ячейка находится на краю сетки, то будем ссылаться
-    // на ячейку на противоположном краю
-    let topRow = x - 1 < 0
-      ? (gridHeight - 1)
-      : x - 1;
-    let bottomRow = (x + 1 === gridHeight)
-      ? 0
-      : x + 1;
-    let leftColumn = y - 1 < 0
-      ? (gridWidth - 1)
-      : y - 1;
-    let rightColumn = (y + 1 === gridWidth)
-      ? 0
-      : y + 1;
+  let calculateNeighbours = function(x, y) {
+    let topRow = x - 1 < 0 ? gridHeight - 1 : x - 1;
+    let bottomRow = x + 1 === gridHeight ? 0 : x + 1;
+    let leftColumn = y - 1 < 0 ? gridWidth - 1 : y - 1;
+    let rightColumn = y + 1 === gridWidth ? 0 : y + 1;
 
     let total = 0;
     total += grid[topRow][leftColumn].status;
@@ -45,8 +34,6 @@ export const advanceGrid = function (grid = []) {
     return total;
   };
 
-  // создадим новый массив, в который запишем результаты после применения правил
-  // игры к существующей сетке
   let gameState = [];
   for (let i = 0; i < gridHeight; i++) {
     let row = [];
@@ -55,18 +42,18 @@ export const advanceGrid = function (grid = []) {
       let neighbours = calculateNeighbours(i, j);
       if (cellIsAlive) {
         if (neighbours < 2) {
-          row.push({status: 0});
+          row.push({ status: 0 });
         } else if (neighbours > 3) {
-          row.push({status: 0});
+          row.push({ status: 0 });
         } else {
-          row.push({status: 1});
+          row.push({ status: 1 });
         }
       }
       if (!cellIsAlive) {
         if (neighbours === 3) {
-          row.push({status: 1, newBorn: true});
+          row.push({ status: 1, newBorn: true });
         } else {
-          row.push({status: 0});
+          row.push({ status: 0 });
         }
       }
     }
