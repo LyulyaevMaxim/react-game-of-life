@@ -3,7 +3,7 @@ const initialState = {
   isRunning: false
 };
 
-export default (state = initialState, action) => {
+export default function timer(state = initialState, action) {
   switch (action.type) {
     case "PLAY":
       return {
@@ -18,4 +18,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

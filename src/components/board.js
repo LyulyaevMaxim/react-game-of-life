@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { toggleAlive } from "../actions/";
-import Cell from "../components/cell";
+// import { connect } from "react-redux";
+// import { toggleAlive } from "../actions/";
+// import Cell from "../components/cell";
 
-class Board extends Component {
+export default class Board extends Component {
   render() {
     let boardVisible = this.props.boardVisible ? "board" : "hidden";
 
@@ -31,22 +31,3 @@ class Board extends Component {
               </tr>
             ))}
       */
-
-function mapStateToProps(state) {
-  return {
-    boardVisible: state.boardReducer.boardVisible,
-    board: state.Board
-  };
-}
-
-// const mapStateToProps = ({ board }) => {
-//   return { board };
-// };
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleAlive: (x, y) => dispatch(toggleAlive(x, y))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board);

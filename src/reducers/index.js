@@ -1,13 +1,24 @@
 import { combineReducers } from "redux";
 
-import formsReducer from "./reducer_play_status";
+import formsReducer from "./reducer_forms";
 import boardReducer from "./reducer_board";
 import playStatusReducer from "./reducer_play_status";
 
-const rootReducer = combineReducers({
-  forms: formsReducer,
-  board: boardReducer,
-  playState: playStatusReducer
+// const initialState = {
+//   boardVisible: false,
+//   boardWidth: 0,
+//   boardHeight: 0,
+//   createBoard: []
+// };
+
+export default combineReducers({
+  formsReducer,
+  boardReducer,
+  playStatusReducer
 });
 
-export default rootReducer;
+// export default function userstate(state = initialState) {
+//   return state;
+// }
+
+// export default rootReducer;

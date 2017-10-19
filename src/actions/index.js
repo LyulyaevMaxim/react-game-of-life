@@ -1,3 +1,10 @@
+export function setSizesBoard(columns, rows) {
+  return {
+    type: "SET_SIZES",
+    payload: [columns, rows]
+  };
+}
+
 export function createBoard(columns, rows) {
   return { type: "CREATE", columns, rows };
 }
