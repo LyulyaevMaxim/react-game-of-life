@@ -1,49 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { tick, startPlaying, stopPlaying, clear } from "../actions/";
+
 
 class Control extends Component {
   render() {
+    let buttonContent = this.props.board.isRunning ? "Стоп" : "Пуск";
     return (
       <div className="button-container">
         <button onClick={() => this.clear()}>Очистить</button>
         <button onClick={() => this.togglePlay()}>
-          {this.props.playState.isRunning ? "Стоп" : "Пуск"}
+          {buttonContent}
         </button>
       </div>
     );
   }
 
   togglePlay() {
-    if (this.props.playState.isRunning) {
-      clearInterval(this.props.playState.timerId);
-      this.props.stopPlaying();
+    if (this.props.board.isRunning) {
+      clearInterval(this.props.board.timerId);
+      this.props.action.stopPlaying();
     } else {
-      let interval = setInterval(this.props.tick, 100);
-      this.props.startPlaying(interval);
+      let interval = setInterval(this.props.action.tick, 100);
+      this.props.action.startPlaying(interval);
     }
   }
 
   clear() {
-    if (this.props.playState.isRunning) {
-      clearInterval(this.props.playState.timerId);
-      this.props.stopPlaying();
+    if (this.props.board.isRunning) {
+      clearInterval(this.props.board.timerId);
+      this.props.action.stopPlaying();
     }
-    this.props.clear();
+    this.props.action.clear();
   }
 }
 
-const mapStateToProps = ({ playState }) => {
-  return { playState };
-};
-
-const mapDispatchToProps = dispatch => {
+function mapStateToProps(state) {
   return {
-    tick: () => dispatch(tick()),
-    startPlaying: timerId => dispatch(startPlaying(timerId)),
-    stopPlaying: () => dispatch(stopPlaying()),
-    clear: () => dispatch(clear())
+    board: state.boardReducer
   };
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Control);
+export default connect(mapStateToProps)(Control);

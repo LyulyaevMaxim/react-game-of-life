@@ -8,6 +8,7 @@
   top: 25%;
   transform: translate(-50%, -50%);
 }
+
 .board-definition {
   display: flex;
   flex-direction: column;
@@ -103,9 +104,11 @@ header h1 {
   align-items: center;
   margin-top: 30px;
 }
+
 .button-container button {
   margin-right: 10px;
 }
+
 .button-container .show-form-button,
 .button-container button {
   border: 1px solid;
@@ -120,9 +123,14 @@ header h1 {
   min-width: 61px;
   justify-content: center;
 }
+
 .button-container .show-form-button:hover,
 .button-container button:hover {
   background: gold;
   border-color: gold;
   color: white;
+}
+
+.board.block {
+  pointer-events: none;
 }

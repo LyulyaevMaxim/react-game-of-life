@@ -9,15 +9,15 @@ import Control from "../containers/control";
 
 class App extends Component {
   render() {
-    const board = this.props.board,
-      form = this.props.form;
+    const board = this.props.board;
     return (
       <div>
         <header>
-          <h1>"Жизнь" на React {this.props.boardVisible}</h1>
+          <h1>"Жизнь" на React</h1>
         </header>
-        <Forms visible={form.formVisible} setSizes={this.props.Actions} />
-        <Board visible={board.boardVisible} />
+        <Forms visible={board.formVisible} action={this.props.Actions} />
+        <Board visible={board.boardVisible} action={this.props.Actions} />
+        <Control action={this.props.Actions} />
       </div>
     );
   }
@@ -25,7 +25,6 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    form: state.formsReducer,
     board: state.boardReducer
   };
 }

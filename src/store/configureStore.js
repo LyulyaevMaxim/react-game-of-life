@@ -1,7 +1,5 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import rootReducer from "../reducers";
-
-// const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState);

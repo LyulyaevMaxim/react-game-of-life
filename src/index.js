@@ -5,13 +5,12 @@ import configureStore from "./store/configureStore";
 import "./reset.css";
 import "./styles.css";
 import App from "./containers/app";
-import registerServiceWorker from "./registerServiceWorker";
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store} /*{createStoreWithMiddleware(reducers)}*/>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById("root")
 );
-registerServiceWorker();
+

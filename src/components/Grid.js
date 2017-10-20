@@ -11,11 +11,11 @@ export const makeGrid = (height, width) => {
   return grid;
 };
 
-export const advanceGrid = function(grid = []) {
+export const advanceGrid = function (grid = []) {
   let gridHeight = grid.length;
   let gridWidth = grid[0].length;
 
-  let calculateNeighbours = function(x, y) {
+  let calculateNeighbours = function (x, y) {
     let topRow = x - 1 < 0 ? gridHeight - 1 : x - 1;
     let bottomRow = x + 1 === gridHeight ? 0 : x + 1;
     let leftColumn = y - 1 < 0 ? gridWidth - 1 : y - 1;

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { connect } from "react-redux";
-import { createBoard, reCreateBoard } from "../actions/";
-
-// export let GRID_HEIGHT = 0;
-// export let GRID_WIDTH = 0;
+// import { connect } from "react-redux";
 
 export default class Forms extends Component {
   constructor(props) {
@@ -25,8 +21,11 @@ export default class Forms extends Component {
     //
   };
 
-  setSizes(e) {
-    this.props.setSizes.setSizesBoard(1, 2);
+  createBoard(e) {
+    this.props.action.createBoard(
+      ReactDOM.findDOMNode(this.refs.boardColumn).value,
+      ReactDOM.findDOMNode(this.refs.boardRow).value
+    );
   }
 
   componentDidMount = () => {
@@ -42,7 +41,6 @@ export default class Forms extends Component {
 
   render() {
     let formClass = this.props.visible ? "popup board-definition" : "hidden",
-      showFormButton = this.props.visible ? "hidden" : "button-container",
       showFormСontinueButton = this.state.firstShow ? "hidden" : "";
     return (
       <form className={formClass} onSubmit={this.handleSubmit}>
@@ -51,21 +49,21 @@ export default class Forms extends Component {
           className="column"
           placeholder="Ширина поля"
           defaultValue=""
+          min="1"
           ref="boardColumn"
           type="number"
-          min="1"
           required
         />
         <input
           className="row"
           placeholder="Высота поля"
           defaultValue=""
+          min="1"
           ref="boardRow"
           type="number"
-          min="1"
           required
         />
-        <button onClick={this.setSizes.bind(this)} type="submit">
+        <button onClick={this.createBoard.bind(this)} type="submit">
           Создать
         </button>
         <button
@@ -77,22 +75,5 @@ export default class Forms extends Component {
       </form>
     );
   }
-
-  createBoard() {
-    //   GRID_HEIGHT = ReactDOM.findDOMNode(this.refs.boardColumn).value;
-    //   GRID_WIDTH = ReactDOM.findDOMNode(this.refs.boardRow).value;
-    //   //теперь надо обратится к reducer_board
-  }
 }
 
-// const mapStateToProps = ({ forms }) => {
-//   return { forms };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     createBoard: (x, y) => dispatch(createBoard(x, y))
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Forms);

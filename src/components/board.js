@@ -1,33 +1,43 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { toggleAlive } from "../actions/";
-// import Cell from "../components/cell";
+import { connect } from "react-redux";
 
-export default class Board extends Component {
+class Board extends Component {
   render() {
-    let boardVisible = this.props.boardVisible ? "board" : "hidden";
-
+    let boardArray = this.props.myState.board,
+      boardClass = this.props.myState.isRunning ? "block" : "";
     return (
-      <div className="board ">
+      <div className={`board ${boardClass}`}>
         <table>
-          <tbody />
+          <tbody>
+            {boardArray.map((row, i) =>
+              <tr key={i}>{row.map((cell, j) =>
+                <Cell
+                  key={j}
+                  alive={cell.status}
+                  newBorn={cell.newBorn}
+                  handleClick={() => this.props.action.toggleAlive(i, j)} />
+              )}</tr>)}
+          </tbody>
         </table>
       </div>
     );
   }
 }
 
-/*
-{this.props.board.map((row, i) => (
-              <tr key={i}>
-                {row.map((cell, j) => (
-                  <Cell
-                    key={j}
-                    alive={cell.status}
-                    newBorn={cell.newBorn}
-                    handleClick={() => this.props.toggleAlive(i, j)}
-                  />
-                ))}
-              </tr>
-            ))}
-      */
+function Cell({ alive, newBorn, handleClick }) {
+  return (
+    <td
+      onClick={handleClick}
+      className={`${alive ? 'alive' : ''} ${newBorn ? 'new-born' : ''}`}
+    >
+    </td>
+  )
+}
+
+const mapStateToProps = state => {
+  return {
+    myState: state.boardReducer
+  };
+};
+
+export default connect(mapStateToProps)(Board);
