@@ -4,13 +4,16 @@ import { connect } from "react-redux";
 
 class Control extends Component {
   render() {
-    let buttonContent = this.props.board.isRunning ? "Стоп" : "Пуск";
+    let buttonPlayContent = this.props.board.isRunning ? "Стоп" : "Пуск";
     return (
       <div className="button-container">
         <button onClick={() => this.clear()}>Очистить</button>
         <button onClick={() => this.togglePlay()}>
-          {buttonContent}
+          {buttonPlayContent}
         </button>
+        <button onClick={() => this.save()}>Сохранить</button>
+        <button onClick={() => this.load()}>Загрузить</button>
+
       </div>
     );
   }
@@ -31,6 +34,16 @@ class Control extends Component {
       this.props.action.stopPlaying();
     }
     this.props.action.clear();
+  }
+
+  save() {
+    this.props.action.stopPlaying();
+    this.props.action.savePlay("maxim");
+  }
+
+  load() {
+    this.props.action.stopPlaying();
+    this.props.action.loadPlay("maxim");
   }
 }
 

@@ -53,6 +53,22 @@ function boardReducer(state = initialState, action) {
         timerId: null,
         isRunning: false
       };
+    case "SAVE":
+      return {
+        ...state,
+        username: saveToLocalStorage(action.nickname, state.board)
+      };
+    case "LOAD":
+      let oldArray = loadBoardOfLocalStorage(action.nickname);
+      return {
+        ...state,
+        timerId: null,
+        isRunning: false,
+        board: oldArray,
+        boardHeight: oldArray.length,
+        boardWidth: oldArray[0].length,
+        username: action.nickname
+      };
     default:
       return state;
   }
@@ -61,3 +77,19 @@ function boardReducer(state = initialState, action) {
 export default combineReducers({
   boardReducer
 });
+
+function saveToLocalStorage(nick, board) {
+  try {
+    let temp = JSON.stringify(board);
+    localStorage.setItem(`${nick}`, temp);
+  } catch (e) {
+    if (e == 'QUOTA_EXCEEDED_ERR') {
+      alert('Имейте совесть! Нельзя столько хранить в localStorage :(');
+    }
+  }
+}
+
+function loadBoardOfLocalStorage(nick) {
+  let temp = localStorage.getItem(nick);
+  return JSON.parse(temp);
+}

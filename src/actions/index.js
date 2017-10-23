@@ -21,6 +21,14 @@ export function stopPlaying(timerId) {
   return { type: "STOP", timerId };
 }
 
+export function savePlay(nickname) {
+  return { type: "SAVE", nickname };
+}
+
+export function loadPlay(nickname) {
+  return { type: "LOAD", nickname };
+}
+
 export function clear() {
   return { type: "CLEAR" };
 }
