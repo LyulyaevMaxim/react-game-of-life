@@ -1,19 +1,21 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 
 class Control extends Component {
   render() {
     let buttonPlay = this.props.board.isRunning ? "Стоп" : "Пуск",
-      buttonReCreate = this.props.board.formVisible ? "disabled" : "";
+      buttonReCreate = this.props.board.formVisible ? "disabled" : "",
+      buttonVisible = this.props.board.firstShow ? "disabled" : "";
     return (
       <div className="button-container">
         <button onClick={(e) => this.showFormForCreate(e)} className={buttonReCreate}>Пересоздать</button>
-        <button onClick={(e) => this.clear(e)}>Очистить</button>
-        <button onClick={(e) => this.togglePlay(e)}>
+        <button onClick={(e) => this.clear(e)} className={buttonVisible}> Очистить</button>
+        <button onClick={(e) => this.togglePlay(e)} className={buttonVisible}>
           {buttonPlay}
         </button>
-        <button onClick={(e) => this.save(e)}>Сохранить</button>
+        <button onClick={(e) => this.save(e)} className={buttonVisible}> Сохранить</button>
         <button onClick={(e) => this.load(e)}>Загрузить</button>
       </div>
     );
@@ -22,6 +24,7 @@ class Control extends Component {
   togglePlay(event) {
     event.preventDefault();
     if (this.props.board.isRunning) {
+      console.log("stop");
       clearInterval(this.props.board.timerId);
       this.props.action.stopPlaying();
     } else {
@@ -41,12 +44,12 @@ class Control extends Component {
 
   save(event) {
     event.preventDefault();
-    this.props.action.savePlay("maxim");
+    this.props.action.showFormForSave();
   }
 
   load(event) {
     event.preventDefault();
-    this.props.action.loadPlay("maxim");
+    this.props.action.showFormForLoad();
   }
 
   showFormForCreate(event) {

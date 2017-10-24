@@ -40,3 +40,19 @@ export function showFormForCreate() {
 export function hideFormForCreate() {
   return { type: "HIDE_FORM_FOR_CREATE" };
 }
+
+export function showFormForSave() {
+  return { type: "SHOW_FORM_FOR_SAVE" };
+}
+
+export function hideFormForSave() {
+  return { type: "HIDE_FORM_FOR_SAVE" };
+}
+
+export function showFormForLoad() {
+  return { type: "SHOW_FORM_FOR_LOAD" };
+}
+
+export function hideFormForLoad() {
+  return { type: "HIDE_FORM_FOR_LOAD" };
+}

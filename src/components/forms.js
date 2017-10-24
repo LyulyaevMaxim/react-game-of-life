@@ -15,9 +15,33 @@ class Forms extends Component {
     );
   }
 
+  savePlay(event) {
+    event.preventDefault();
+    this.props.action.savePlay(
+      ReactDOM.findDOMNode(this.refs.nickname).value
+    );
+  }
+
+  loadPlay(event) {
+    event.preventDefault();
+    this.props.action.loadPlay(
+      ReactDOM.findDOMNode(this.refs.nickname).value
+    );
+  }
+
   hideFormForCreate(event) {
     event.preventDefault();
     this.props.action.hideFormForCreate();
+  }
+
+  hideFormForSave(event) {
+    event.preventDefault();
+    this.props.action.hideFormForSave();
+  }
+
+  hideFormForLoad(event) {
+    event.preventDefault();
+    this.props.action.hideFormForLoad();
   }
 
   componentDidMount = () => {
@@ -26,20 +50,42 @@ class Forms extends Component {
 
   render() {
     let formClass = this.props.visible ? "popup board-definition" : "hidden",
+      formForSaveClass = this.props.board.formForSaveVisible ? "popup board-definition" : "hidden",
+      formForLoadClass = this.props.board.formForLoadVisible ? "popup board-definition" : "hidden",
       showFormСontinueButton = this.props.board.firstShow ? "hidden" : "";
 
     return (
-      <form className={formClass} onSubmit={this.createBoard.bind(this)}>
-        <p>Введите размеры поля:</p>
-        <input placeholder="Ширина поля" defaultValue="" min="1"
-          ref="boardColumn" type="number" required />
-        <input placeholder="Высота поля" defaultValue="" min="1"
-          ref="boardRow" type="number" required />
-        <button type="submit">Создать</button>
-        <button
-          onClick={(e) => this.hideFormForCreate(e)}
-          className={showFormСontinueButton}>Продолжить</button>
-      </form>
+      <div>
+        <form className={formClass} onSubmit={this.createBoard.bind(this)}>
+          <p>Введите размеры поля:</p>
+          <input placeholder="Ширина поля" defaultValue="" min="1"
+            ref="boardColumn" type="number" required />
+          <input placeholder="Высота поля" defaultValue="" min="1"
+            ref="boardRow" type="number" required />
+          <button type="submit">Создать</button>
+          <button
+            onClick={(e) => this.hideFormForCreate(e)}
+            className={showFormСontinueButton}>Продолжить</button>
+        </form>
+
+        <form className={formForSaveClass} onSubmit={this.savePlay.bind(this)}>
+          <p>Введите ваше имя</p>
+          <input placeholder="Ваше имя" defaultValue=""
+            ref="nickname" required />
+          <button type="submit">Сохранить</button>
+          <button
+            onClick={(e) => this.hideFormForSave(e)}>Продолжить</button>
+        </form>
+
+        <form className={formForLoadClass} onSubmit={this.loadPlay.bind(this)}>
+          <p>Введите имя, которое использовали</p>
+          <input placeholder="Ваше имя было.." defaultValue=""
+            ref="nickname" required />
+          <button type="submit">Загрузить</button>
+          <button
+            onClick={(e) => this.hideFormForLoad(e)}>Продолжить</button>
+        </form>
+      </div>
     );
   }
 }

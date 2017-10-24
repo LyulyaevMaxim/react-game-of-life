@@ -3,6 +3,8 @@ import * as grid from "../components/grid";;
 
 const initialState = {
   formVisible: true,
+  formForSaveVisible: false,
+  formForLoadVisible: false,
   boardVisible: false,
   boardWidth: 0,
   boardHeight: 0,
@@ -64,7 +66,8 @@ function boardReducer(state = initialState, action) {
     case "SAVE":
       return {
         ...state,
-        username: saveToLocalStorage(action.nickname, state.board)
+        username: saveToLocalStorage(action.nickname, state.board),
+        formForSaveVisible: false
       };
 
     case "LOAD":
@@ -78,13 +81,16 @@ function boardReducer(state = initialState, action) {
         boardHeight: oldArray.length,
         boardWidth: oldArray[0].length,
         username: action.nickname,
-        firstShow: false
+        firstShow: false,
+        formForLoadVisible: false
       };
 
     case "SHOW_FORM_FOR_CREATE":
       return {
         ...state,
-        formVisible: true
+        formVisible: true,
+        formForLoadVisible: false,
+        formForSaveVisible: false
       };
 
     case "HIDE_FORM_FOR_CREATE":
@@ -96,7 +102,29 @@ function boardReducer(state = initialState, action) {
     case "SHOW_FORM_FOR_SAVE":
       return {
         ...state,
-        formVisible: true
+        formVisible: false,
+        formForLoadVisible: false,
+        formForSaveVisible: true
+      };
+
+    case "HIDE_FORM_FOR_SAVE":
+      return {
+        ...state,
+        formForSaveVisible: false
+      };
+
+    case "SHOW_FORM_FOR_LOAD":
+      return {
+        ...state,
+        formVisible: false,
+        formForSaveVisible: false,
+        formForLoadVisible: true
+      };
+
+    case "HIDE_FORM_FOR_LOAD":
+      return {
+        ...state,
+        formForLoadVisible: false
       };
 
     default:
@@ -121,5 +149,5 @@ function saveToLocalStorage(nick, board) {
 
 function loadBoardOfLocalStorage(nick) {
   let temp = localStorage.getItem(nick);
-  return JSON.parse(temp);
+  return (temp === null) ? [[]] : JSON.parse(temp);
 }
