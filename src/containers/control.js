@@ -4,21 +4,23 @@ import { connect } from "react-redux";
 
 class Control extends Component {
   render() {
-    let buttonPlayContent = this.props.board.isRunning ? "Стоп" : "Пуск";
+    let buttonPlay = this.props.board.isRunning ? "Стоп" : "Пуск",
+      buttonReCreate = this.props.board.formVisible ? "disabled" : "";
     return (
       <div className="button-container">
-        <button onClick={() => this.clear()}>Очистить</button>
-        <button onClick={() => this.togglePlay()}>
-          {buttonPlayContent}
+        <button onClick={(e) => this.showFormForCreate(e)} className={buttonReCreate}>Пересоздать</button>
+        <button onClick={(e) => this.clear(e)}>Очистить</button>
+        <button onClick={(e) => this.togglePlay(e)}>
+          {buttonPlay}
         </button>
-        <button onClick={() => this.save()}>Сохранить</button>
-        <button onClick={() => this.load()}>Загрузить</button>
-
+        <button onClick={(e) => this.save(e)}>Сохранить</button>
+        <button onClick={(e) => this.load(e)}>Загрузить</button>
       </div>
     );
   }
 
-  togglePlay() {
+  togglePlay(event) {
+    event.preventDefault();
     if (this.props.board.isRunning) {
       clearInterval(this.props.board.timerId);
       this.props.action.stopPlaying();
@@ -28,7 +30,8 @@ class Control extends Component {
     }
   }
 
-  clear() {
+  clear(event) {
+    event.preventDefault();
     if (this.props.board.isRunning) {
       clearInterval(this.props.board.timerId);
       this.props.action.stopPlaying();
@@ -36,14 +39,19 @@ class Control extends Component {
     this.props.action.clear();
   }
 
-  save() {
-    this.props.action.stopPlaying();
+  save(event) {
+    event.preventDefault();
     this.props.action.savePlay("maxim");
   }
 
-  load() {
-    this.props.action.stopPlaying();
+  load(event) {
+    event.preventDefault();
     this.props.action.loadPlay("maxim");
+  }
+
+  showFormForCreate(event) {
+    event.preventDefault();
+    this.props.action.showFormForCreate();
   }
 }
 

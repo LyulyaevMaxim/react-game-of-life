@@ -32,3 +32,11 @@ export function loadPlay(nickname) {
 export function clear() {
   return { type: "CLEAR" };
 }
+
+export function showFormForCreate() {
+  return { type: "SHOW_FORM_FOR_CREATE" };
+}
+
+export function hideFormForCreate() {
+  return { type: "HIDE_FORM_FOR_CREATE" };
+}

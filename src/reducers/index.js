@@ -8,7 +8,8 @@ const initialState = {
   boardHeight: 0,
   board: [],
   timerId: null,
-  isRunning: false
+  isRunning: false,
+  firstShow: true
 };
 
 function boardReducer(state = initialState, action) {
@@ -22,16 +23,19 @@ function boardReducer(state = initialState, action) {
         ...state,
         board: board
       };
+
     case "CLEAR":
       return {
         ...state,
         board: grid.makeGrid(state.boardHeight, state.boardWidth)
       };
+
     case "TICK":
       return {
         ...state,
         board: grid.advanceGrid(state.board)
       };
+
     case "SET_SIZES":
       return {
         ...state,
@@ -39,36 +43,62 @@ function boardReducer(state = initialState, action) {
         boardHeight: +action.payload[1],
         board: grid.makeGrid(+action.payload[1], +action.payload[0]),
         formVisible: false,
-        boardVisible: true
+        boardVisible: true,
+        firstShow: false
       };
+
     case "PLAY":
       return {
         ...state,
         timerId: action.timerId,
         isRunning: !state.isRunning
       };
+
     case "STOP":
       return {
         ...state,
         timerId: null,
         isRunning: false
       };
+
     case "SAVE":
       return {
         ...state,
         username: saveToLocalStorage(action.nickname, state.board)
       };
+
     case "LOAD":
       let oldArray = loadBoardOfLocalStorage(action.nickname);
       return {
         ...state,
         timerId: null,
         isRunning: false,
+        formVisible: false,
         board: oldArray,
         boardHeight: oldArray.length,
         boardWidth: oldArray[0].length,
-        username: action.nickname
+        username: action.nickname,
+        firstShow: false
       };
+
+    case "SHOW_FORM_FOR_CREATE":
+      return {
+        ...state,
+        formVisible: true
+      };
+
+    case "HIDE_FORM_FOR_CREATE":
+      return {
+        ...state,
+        formVisible: false
+      };
+
+    case "SHOW_FORM_FOR_SAVE":
+      return {
+        ...state,
+        formVisible: true
+      };
+
     default:
       return state;
   }

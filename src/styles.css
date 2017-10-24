@@ -58,7 +58,7 @@
 .board {
   display: flex;
   justify-content: center;
-  min-height: 200px;
+  min-height: 400px;
 }
 
 .board td {
@@ -133,5 +133,10 @@ header h1 {
 }
 
 .board.block {
+  pointer-events: none;
+}
+
+.button-container .disabled {
+  opacity: 0.5;
   pointer-events: none;
 }
