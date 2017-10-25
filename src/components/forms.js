@@ -18,14 +18,14 @@ class Forms extends Component {
   savePlay(event) {
     event.preventDefault();
     this.props.action.savePlay(
-      ReactDOM.findDOMNode(this.refs.nickname).value
+      ReactDOM.findDOMNode(this.refs.saveNickname).value
     );
   }
 
   loadPlay(event) {
     event.preventDefault();
     this.props.action.loadPlay(
-      ReactDOM.findDOMNode(this.refs.nickname).value
+      ReactDOM.findDOMNode(this.refs.loadNickname).value
     );
   }
 
@@ -71,7 +71,7 @@ class Forms extends Component {
         <form className={formForSaveClass} onSubmit={this.savePlay.bind(this)}>
           <p>Введите ваше имя</p>
           <input placeholder="Ваше имя" defaultValue=""
-            ref="nickname" required />
+            ref="saveNickname" required />
           <button type="submit">Сохранить</button>
           <button
             onClick={(e) => this.hideFormForSave(e)}>Продолжить</button>
@@ -80,7 +80,7 @@ class Forms extends Component {
         <form className={formForLoadClass} onSubmit={this.loadPlay.bind(this)}>
           <p>Введите имя, которое использовали</p>
           <input placeholder="Ваше имя было.." defaultValue=""
-            ref="nickname" required />
+            ref="loadNickname" required />
           <button type="submit">Загрузить</button>
           <button
             onClick={(e) => this.hideFormForLoad(e)}>Продолжить</button>

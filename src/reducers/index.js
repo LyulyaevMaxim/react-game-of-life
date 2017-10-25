@@ -149,5 +149,6 @@ function saveToLocalStorage(nick, board) {
 
 function loadBoardOfLocalStorage(nick) {
   let temp = localStorage.getItem(nick);
+  console.log(temp);
   return (temp === null) ? [[]] : JSON.parse(temp);
 }
