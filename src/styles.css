@@ -38,6 +38,7 @@
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
+  width: 100%;
 }
 
 .board-definition input + input {
