@@ -2,30 +2,38 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
-
 class Control extends Component {
   render() {
-    let buttonPlay = this.props.board.isRunning ? "Стоп" : "Пуск",
-      buttonReCreate = this.props.board.formVisible ? "disabled" : "",
-      buttonVisible = this.props.board.firstShow ? "disabled" : "";
+    let buttonPlay = this.props.controls.isRunning ? "Стоп" : "Пуск",
+      buttonReCreate = this.props.forms.formVisible ? "disabled" : "",
+      buttonVisible = this.props.forms.firstShow ? "disabled" : "";
+
     return (
       <div className="button-container">
-        <button onClick={(e) => this.showFormForCreate(e)} className={buttonReCreate}>Пересоздать</button>
-        <button onClick={(e) => this.clear(e)} className={buttonVisible}> Очистить</button>
-        <button onClick={(e) => this.togglePlay(e)} className={buttonVisible}>
+        <button
+          onClick={e => this.showFormForCreate(e)}
+          className={buttonReCreate}
+        >
+          Пересоздать
+        </button>
+        <button onClick={e => this.clear(e)} className={buttonVisible}>
+          Очистить
+        </button>
+        <button onClick={e => this.togglePlay(e)} className={buttonVisible}>
           {buttonPlay}
         </button>
-        <button onClick={(e) => this.save(e)} className={buttonVisible}> Сохранить</button>
-        <button onClick={(e) => this.load(e)}>Загрузить</button>
+        <button onClick={e => this.save(e)} className={buttonVisible}>
+          Сохранить
+        </button>
+        <button onClick={e => this.load(e)}>Загрузить</button>
       </div>
     );
   }
 
   togglePlay(event) {
     event.preventDefault();
-    if (this.props.board.isRunning) {
-      console.log("stop");
-      clearInterval(this.props.board.timerId);
+    if (this.props.controls.isRunning) {
+      clearInterval(this.props.controls.timerId);
       this.props.action.stopPlaying();
     } else {
       let interval = setInterval(this.props.action.tick, 100);
@@ -35,8 +43,8 @@ class Control extends Component {
 
   clear(event) {
     event.preventDefault();
-    if (this.props.board.isRunning) {
-      clearInterval(this.props.board.timerId);
+    if (this.props.controls.isRunning) {
+      clearInterval(this.props.controls.timerId);
       this.props.action.stopPlaying();
     }
     this.props.action.clear();
@@ -60,7 +68,9 @@ class Control extends Component {
 
 function mapStateToProps(state) {
   return {
-    board: state.boardReducer
+    board: state.boardReducer,
+    forms: state.formReducer,
+    controls: state.controlReducer
   };
 }
 

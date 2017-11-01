@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as Actions from "../actions";
+import * as Actions from "../actions/actions";
 
 import Forms from "../components/forms";
 import Board from "../components/board";
@@ -9,14 +9,14 @@ import Control from "../containers/control";
 
 class App extends Component {
   render() {
-    const board = this.props.board;
+    const formsState = this.props.forms;
     return (
       <div>
         <header>
           <h1>"Жизнь" на React</h1>
         </header>
-        <Forms visible={board.formVisible} action={this.props.Actions} />
-        <Board visible={board.boardVisible} action={this.props.Actions} />
+        <Forms visible={formsState.formVisible} action={this.props.Actions} />
+        <Board visible={formsState.boardVisible} action={this.props.Actions} />
         <Control action={this.props.Actions} />
       </div>
     );
@@ -25,7 +25,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    board: state.boardReducer
+    forms: state.formReducer
   };
 }
 

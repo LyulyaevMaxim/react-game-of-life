@@ -50,40 +50,65 @@ class Forms extends Component {
 
   render() {
     let formClass = this.props.visible ? "popup board-definition" : "hidden",
-      formForSaveClass = this.props.board.formForSaveVisible ? "popup board-definition" : "hidden",
-      formForLoadClass = this.props.board.formForLoadVisible ? "popup board-definition" : "hidden",
-      showFormСontinueButton = this.props.board.firstShow ? "hidden" : "";
+      formForSaveClass = this.props.forms.formForSaveVisible
+        ? "popup board-definition"
+        : "hidden",
+      formForLoadClass = this.props.forms.formForLoadVisible
+        ? "popup board-definition"
+        : "hidden",
+      showFormСontinueButton = this.props.forms.firstShow ? "hidden" : "";
 
     return (
       <div>
         <form className={formClass} onSubmit={this.createBoard.bind(this)}>
           <p>Введите размеры поля:</p>
-          <input placeholder="Ширина поля" defaultValue="" min="1"
-            ref="boardColumn" type="number" required />
-          <input placeholder="Высота поля" defaultValue="" min="1"
-            ref="boardRow" type="number" required />
+          <input
+            placeholder="Ширина поля"
+            defaultValue=""
+            min="1"
+            ref="boardColumn"
+            type="number"
+            required
+          />
+          <input
+            placeholder="Высота поля"
+            defaultValue=""
+            min="1"
+            ref="boardRow"
+            type="number"
+            required
+          />
           <button type="submit">Создать</button>
           <button
-            onClick={(e) => this.hideFormForCreate(e)}
-            className={showFormСontinueButton}>Продолжить</button>
+            onClick={e => this.hideFormForCreate(e)}
+            className={showFormСontinueButton}
+          >
+            Продолжить
+          </button>
         </form>
 
         <form className={formForSaveClass} onSubmit={this.savePlay.bind(this)}>
           <p>Введите ваше имя</p>
-          <input placeholder="Ваше имя" defaultValue=""
-            ref="saveNickname" required />
+          <input
+            placeholder="Ваше имя"
+            defaultValue=""
+            ref="saveNickname"
+            required
+          />
           <button type="submit">Сохранить</button>
-          <button
-            onClick={(e) => this.hideFormForSave(e)}>Продолжить</button>
+          <button onClick={e => this.hideFormForSave(e)}>Продолжить</button>
         </form>
 
         <form className={formForLoadClass} onSubmit={this.loadPlay.bind(this)}>
           <p>Введите имя, которое использовали</p>
-          <input placeholder="Ваше имя было.." defaultValue=""
-            ref="loadNickname" required />
+          <input
+            placeholder="Ваше имя было.."
+            defaultValue=""
+            ref="loadNickname"
+            required
+          />
           <button type="submit">Загрузить</button>
-          <button
-            onClick={(e) => this.hideFormForLoad(e)}>Продолжить</button>
+          <button onClick={e => this.hideFormForLoad(e)}>Продолжить</button>
         </form>
       </div>
     );
@@ -92,7 +117,9 @@ class Forms extends Component {
 
 function mapStateToProps(state) {
   return {
-    board: state.boardReducer
+    board: state.boardReducer,
+    forms: state.formReducer,
+    controls: state.controlReducer
   };
 }
 

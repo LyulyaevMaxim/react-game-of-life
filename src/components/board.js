@@ -4,19 +4,23 @@ import { connect } from "react-redux";
 class Board extends Component {
   render() {
     let boardArray = this.props.myState.board,
-      boardClass = this.props.myState.isRunning ? "block" : "";
+      boardClass = this.props.forms.isRunning ? "block" : "";
     return (
       <div className={`board ${boardClass}`}>
         <table>
           <tbody>
-            {boardArray.map((row, i) =>
-              <tr key={i}>{row.map((cell, j) =>
-                <Cell
-                  key={j}
-                  alive={cell.status}
-                  newBorn={cell.newBorn}
-                  handleClick={() => this.props.action.toggleAlive(i, j)} />
-              )}</tr>)}
+            {boardArray.map((row, i) => (
+              <tr key={i}>
+                {row.map((cell, j) => (
+                  <Cell
+                    key={j}
+                    alive={cell.status}
+                    newBorn={cell.newBorn}
+                    handleClick={() => this.props.action.toggleAlive(i, j)}
+                  />
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -28,15 +32,16 @@ function Cell({ alive, newBorn, handleClick }) {
   return (
     <td
       onClick={handleClick}
-      className={`${alive ? 'alive' : ''} ${newBorn ? 'new-born' : ''}`}
-    >
-    </td>
-  )
+      className={`${alive ? "alive" : ""} ${newBorn ? "new-born" : ""}`}
+    />
+  );
 }
 
 const mapStateToProps = state => {
   return {
-    myState: state.boardReducer
+    myState: state.boardReducer,
+    forms: state.formReducer,
+    controls: state.controlReducer
   };
 };
 
