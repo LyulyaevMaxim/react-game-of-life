@@ -25,7 +25,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    forms: state.formReducer
+    forms: state.formsReducer
   };
 }
 

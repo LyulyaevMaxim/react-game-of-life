@@ -40,7 +40,7 @@ function Cell({ alive, newBorn, handleClick }) {
 const mapStateToProps = state => {
   return {
     myState: state.boardReducer,
-    forms: state.formReducer,
+    forms: state.formsReducer,
     controls: state.controlReducer
   };
 };

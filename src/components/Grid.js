@@ -11,11 +11,12 @@ export const makeGrid = (height, width) => {
   return grid;
 };
 
-export const advanceGrid = function (grid = []) {
+export const advanceGrid = (grid = []) => {
   let gridHeight = grid.length;
   let gridWidth = grid[0].length;
+  let gameState = [];
 
-  let calculateNeighbours = function (x, y) {
+  let calculateNeighbours = function(x, y) {
     let topRow = x - 1 < 0 ? gridHeight - 1 : x - 1;
     let bottomRow = x + 1 === gridHeight ? 0 : x + 1;
     let leftColumn = y - 1 < 0 ? gridWidth - 1 : y - 1;
@@ -34,7 +35,6 @@ export const advanceGrid = function (grid = []) {
     return total;
   };
 
-  let gameState = [];
   for (let i = 0; i < gridHeight; i++) {
     let row = [];
     for (let j = 0; j < gridWidth; j++) {
@@ -59,5 +59,6 @@ export const advanceGrid = function (grid = []) {
     }
     gameState.push(row);
   }
+
   return gameState;
 };

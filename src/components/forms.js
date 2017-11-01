@@ -118,7 +118,7 @@ class Forms extends Component {
 function mapStateToProps(state) {
   return {
     board: state.boardReducer,
-    forms: state.formReducer,
+    forms: state.formsReducer,
     controls: state.controlReducer
   };
 }
