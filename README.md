@@ -1,5 +1,5 @@
 ## Демо
-https://maxim-buslaev.github.io/react-game-of-life/build/
+https://lyulyaevmaxim.github.io/react-game-of-life/build/
 
 ## Требования
 * ~~при загрузке страницы запрашиваются размеры игрового поля (N x M)~~
